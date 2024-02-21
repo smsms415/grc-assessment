@@ -29,6 +29,7 @@ const typeDefs = `#graphql
     topLevelConcepts: [Concept]
     allConcepts: [Concept]
     concept(conceptId: Int!): Concept
+    searchByString(str: String!): [Concept]
   }
 
   type Mutation {
@@ -40,7 +41,21 @@ const typeDefs = `#graphql
 
 const resolvers = {
   Query: {
-    topLevelConcepts: async (foo, bar, { dataSources }) => {
+    searchByString: async (_, { str }, { dataSources }) => {
+      try {
+        str = str.toLowerCase();
+        const results = await dataSources.ddb.getAllConcepts();
+        return results.filter(
+          ({ displayName, description }) =>
+            displayName.toLowerCase().includes(str) ||
+            description.toLowerCase().includes(str)
+        );
+      } catch (err) {
+        // TODO implement actual error handling.
+        console.error(err);
+      }
+    },
+    topLevelConcepts: async (_, __, { dataSources }) => {
       try {
         const results = await dataSources.ddb.getTopLevelConcepts();
         return results;
@@ -59,7 +74,7 @@ const resolvers = {
         console.error(err);
       }
     },
-    allConcepts: async (foo, bar, { dataSources }) => {
+    allConcepts: async (_, __, { dataSources }) => {
       try {
         const results = await dataSources.ddb.getAllConcepts();
         return results;
