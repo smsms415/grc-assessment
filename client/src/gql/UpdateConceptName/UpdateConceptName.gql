@@ -1,0 +1,6 @@
+mutation UpdateConceptName($id: Int!, $name: String!) {
+  updateConceptName(conceptId: $id, displayName: $name) {
+    conceptId
+    displayName
+  }
+}

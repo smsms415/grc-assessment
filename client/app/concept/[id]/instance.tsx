@@ -8,6 +8,7 @@ import {
   GetConceptSuspenseQueryHookResult,
 } from "@/src/__generated__";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { EditableDisplayName } from "./editableDisplayName";
 
 export const ConceptInstance = ({ id }: { id: string }) => {
   const result: GetConceptSuspenseQueryHookResult = useSuspenseQuery(
@@ -38,7 +39,7 @@ export const ConceptInstance = ({ id }: { id: string }) => {
               Display Name
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {displayName} <button>📝</button>
+              <EditableDisplayName id={id} displayName={displayName} />
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
