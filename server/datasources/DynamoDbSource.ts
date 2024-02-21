@@ -46,6 +46,7 @@ export class DynamoDataSource {
       TableName: "Concepts",
       Key: {
         conceptId: { N: `${id}` },
+        static: { S: "smsms" },
       },
     };
 
@@ -67,6 +68,7 @@ export class DynamoDataSource {
       TableName: "Concepts",
       Key: {
         conceptId: { N: `${id}` },
+        static: { S: "smsms" },
       },
       ReturnValues: "ALL_NEW" as ReturnValue,
       UpdateExpression: "SET #DN = :dn",

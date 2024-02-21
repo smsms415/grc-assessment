@@ -18,19 +18,27 @@ else:
         TableName=CONCEPTS,
         AttributeDefinitions=[
             {
+                'AttributeName': 'static',
+                'AttributeType': 'S'
+            },
+            {
                 'AttributeName': 'conceptId',
                 'AttributeType': 'N'
             }
         ],
         KeySchema=[
             {
-                'AttributeName': 'conceptId',
+                'AttributeName': 'static',
                 'KeyType': 'HASH'
-            }
+            },
+            {
+                'AttributeName': 'conceptId',
+                'KeyType': 'RANGE'
+            },
         ],
         ProvisionedThroughput={
-            'ReadCapacityUnits': 10,
-            'WriteCapacityUnits': 10
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5 
         },
     )
 
@@ -46,6 +54,7 @@ with open(csv_path) as csvfile:
     for row in reader:
         table.put_item(
             Item={
+                'static': 'smsms',
                 'conceptId': int(row['conceptId']),
                 'displayName': row['displayName'],
                 'description': row['description'],
