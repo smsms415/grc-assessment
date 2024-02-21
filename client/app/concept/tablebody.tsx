@@ -8,10 +8,9 @@ import {
   Concept,
 } from "@/src/__generated__";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import Link from "next/link";
 const TD_CLASSNAME = "border px-4";
 
-export const ConceptListTableBody = () => {
+export const AllConceptsTableBody = () => {
   const result: AllConceptsSuspenseQueryHookResult =
     useSuspenseQuery(AllConceptsDocument);
 
@@ -22,9 +21,18 @@ export const ConceptListTableBody = () => {
   if (!allConcepts) {
     return;
   }
+
+  return <ConceptListTableBody allConcepts={allConcepts as Concept[]} />;
+};
+
+export const ConceptListTableBody = ({
+  allConcepts,
+}: {
+  allConcepts: Concept[];
+}) => {
   return (
     <tbody className="">
-      {(allConcepts as Concept[]).map(
+      {allConcepts.map(
         ({ conceptId, displayName, description, childIds, parentIds }) => (
           <tr key={`tr-${conceptId}`}>
             <td className={TD_CLASSNAME}>

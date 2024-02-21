@@ -1,11 +1,28 @@
-import { ConceptListTableBody } from "./tablebody";
+import { useRef } from "react";
+import { AllConceptsTableBody, ConceptListTableBody } from "../tablebody";
+import { redirect } from "next/navigation";
 
 export default function ListPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  return <ConceptListTable />;
+  return (
+    <section>
+      <form action={doSearch}>
+        <input className="border" name="searchTerm" /> <button>🔍</button>
+      </form>
+      <ConceptListTable />
+    </section>
+  );
+}
+
+// TODO refactor into shared location
+async function doSearch(data: FormData) {
+  "use server";
+  const searchTerm = encodeURIComponent(data.get("searchTerm") as string);
+
+  redirect(`/concept/search/${searchTerm}`);
 }
 
 const ConceptListTable = () => {
@@ -20,7 +37,7 @@ const ConceptListTable = () => {
           <th># Parents</th>
         </tr>
       </thead>
-      <ConceptListTableBody />
+      <AllConceptsTableBody />
     </table>
   );
 };
