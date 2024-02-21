@@ -48,8 +48,8 @@ const resolvers = {
         const results = await dataSources.ddb.getAllConcepts();
         return results.filter(
           ({ displayName, description }) =>
-            displayName.toLowerCase().includes(str) ||
-            description.toLowerCase().includes(str)
+            (displayName ?? "").toLowerCase().includes(str) ||
+            (description ?? "").toLowerCase().includes(str)
         );
       } catch (err) {
         // TODO implement actual error handling.
