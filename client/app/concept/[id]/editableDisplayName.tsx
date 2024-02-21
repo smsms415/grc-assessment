@@ -30,9 +30,9 @@ export const EditableDisplayName = ({
     setInEditMode(false);
     setOriginalName(stagedName);
     await updateConceptNameMutation({
-      variables: { id: parseInt(id, 10), name: stagedName },
+      variables: { id, name: stagedName },
     });
-  }, [stagedName, id]);
+  }, [updateConceptNameMutation, stagedName, id]);
 
   const onClickCancel = useCallback(() => {
     // revert the name

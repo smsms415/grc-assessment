@@ -13,6 +13,7 @@
   "dependencies": {
     "@apollo/client": "^3.9.5",
     "@apollo/experimental-nextjs-app-support": "^0.8.0",
+    "@aws-cdk/aws-apprunner-alpha": "^2.128.0-alpha.0",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript-react-apollo": "^4.3.0",
     "@graphql-codegen/typescript-react-query": "^6.1.0",
