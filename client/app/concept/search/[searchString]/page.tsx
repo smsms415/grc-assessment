@@ -5,6 +5,7 @@ import {
   SearchConceptsTableBody,
 } from "../../tablebody";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 // TODO refactor into shared location
 async function doSearch(data: FormData) {
@@ -20,14 +21,17 @@ export default function SearchPage({
 }) {
   return (
     <section>
-      <form action={doSearch}>
-        <input
-          className="border"
-          name="searchTerm"
-          defaultValue={decodeURIComponent(searchString)}
-        />{" "}
-        <button>🔍</button>
-      </form>
+      <div className="flex">
+        <form action={doSearch}>
+          <input
+            className="border"
+            name="searchTerm"
+            defaultValue={decodeURIComponent(searchString)}
+          />{" "}
+          <button>🔍</button>
+        </form>{" "}
+        <Link href="/">❌</Link>
+      </div>
       <table className="">
         <thead className="bg-blue-100">
           <tr>
