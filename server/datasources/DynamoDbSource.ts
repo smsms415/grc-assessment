@@ -1,6 +1,7 @@
 import {
   DynamoDBClient,
   GetItemCommand,
+  PutItemCommand,
   QueryCommand,
   ReturnValue,
   ScanCommand,
@@ -58,6 +59,56 @@ export class DynamoDataSource {
       return undefined;
     } catch (err) {
       // TODO implement actual error handling
+      console.error(err);
+      return err;
+    }
+  }
+
+  async getMaximumConceptId() {
+    const params = {
+      TableName: "Concepts",
+      KeyConditionExpression: "#static = :static",
+      ExpressionAttributeNames: { "#static": "static" },
+      ExpressionAttributeValues: marshall({ ":static": "smsms" }),
+      ScanIndexForward: false,
+      Limit: 1,
+    };
+
+    try {
+      const results = await this.client.send(new QueryCommand(params));
+
+      if (results.Items.length) {
+        return unmarshall(results.Items[0]).conceptId;
+      }
+
+      return -1;
+    } catch (err) {
+      // TODO implement actual error handling
+      console.error(err);
+      return err;
+    }
+  }
+
+  //
+  async createConcept(displayName: String) {
+    // first get the max concept ID
+    const currentMaximum = await this.getMaximumConceptId();
+    const newId = currentMaximum + 1;
+
+    const params = {
+      TableName: "Concepts",
+      Item: marshall({
+        static: "smsms",
+        conceptId: newId,
+        displayName,
+      }),
+    };
+
+    try {
+      const result = await this.client.send(new PutItemCommand(params));
+
+      return this.getConceptById(newId);
+    } catch (err) {
       console.error(err);
       return err;
     }

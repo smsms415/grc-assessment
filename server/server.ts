@@ -33,7 +33,7 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    # addConcept(displayName: String!): Concept
+    createConcept(displayName: String!): Concept
     updateConceptName(conceptId: Int!, displayName: String!): Concept
     # updateConceptDescription(conceptId: Int!, description: String!): Concept
   }
@@ -85,6 +85,10 @@ const resolvers = {
     },
   },
   Mutation: {
+    createConcept: async (_, { displayName }, { dataSources: { ddb } }) => {
+      const concept = await ddb.createConcept(displayName);
+      return concept;
+    },
     updateConceptName: async (
       _,
       { conceptId, displayName },
