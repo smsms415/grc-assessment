@@ -29,7 +29,7 @@ export default function SearchPage({
             defaultValue={decodeURIComponent(searchString)}
           />{" "}
           <button>🔍</button>
-        </form>{" "}
+        </form>
         <Link href="/">❌</Link>
       </div>
       <table className="">

@@ -1,6 +1,6 @@
-import { useRef } from "react";
-import { AllConceptsTableBody, ConceptListTableBody } from "../tablebody";
+import { AllConceptsTableBody } from "../tablebody";
 import { redirect } from "next/navigation";
+import CreateForm from "./createForm";
 
 export default function ListPage({
   params: { id },
@@ -13,6 +13,7 @@ export default function ListPage({
         <input className="border" name="searchTerm" /> <button>🔍</button>
       </form>
       <ConceptListTable />
+      <CreateForm />
     </section>
   );
 }

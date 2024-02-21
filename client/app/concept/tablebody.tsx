@@ -13,8 +13,12 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 const TD_CLASSNAME = "border px-4";
 
 export const AllConceptsTableBody = () => {
-  const result: AllConceptsSuspenseQueryHookResult =
-    useSuspenseQuery(AllConceptsDocument);
+  const result: AllConceptsSuspenseQueryHookResult = useSuspenseQuery(
+    AllConceptsDocument,
+    {
+      fetchPolicy: "no-cache",
+    }
+  );
 
   const {
     data: { allConcepts },

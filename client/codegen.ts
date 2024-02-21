@@ -1,5 +1,8 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
+/**
+ * TODO: implement running codegen against local
+ */
 const config: CodegenConfig = {
   overwrite: true,
   schema: "https://kvoyiazqo6.execute-api.us-east-2.amazonaws.com/",

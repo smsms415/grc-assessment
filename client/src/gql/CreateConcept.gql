@@ -1,0 +1,5 @@
+mutation CreateConcept($name: String!) {
+  createConcept(displayName: $name) {
+    displayName
+  }
+}
