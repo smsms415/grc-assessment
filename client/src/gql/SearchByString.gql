@@ -1,0 +1,9 @@
+query SearchByString($str: String!) {
+  searchByString(str: $str) {
+    conceptId
+    displayName
+    description
+    childIds
+    parentIds
+  }
+}

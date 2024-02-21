@@ -1,5 +1,9 @@
 import { useRef } from "react";
-import { AllConceptsTableBody, ConceptListTableBody } from "../../tablebody";
+import {
+  AllConceptsTableBody,
+  ConceptListTableBody,
+  SearchConceptsTableBody,
+} from "../../tablebody";
 import { redirect } from "next/navigation";
 
 // TODO refactor into shared location
@@ -24,7 +28,18 @@ export default function SearchPage({
         />{" "}
         <button>🔍</button>
       </form>
-      {/* <ConceptListTable /> */}
+      <table className="">
+        <thead className="bg-blue-100">
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th># Children</th>
+            <th># Parents</th>
+          </tr>
+        </thead>
+        <SearchConceptsTableBody searchTerm={searchString} />
+      </table>
     </section>
   );
 }

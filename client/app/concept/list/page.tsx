@@ -25,6 +25,10 @@ async function doSearch(data: FormData) {
   redirect(`/concept/search/${searchTerm}`);
 }
 
+/*
+ * TODO: next (or maybe apollo client?) needs to refresh the cache when a
+ * concept is updated.
+ */
 const ConceptListTable = () => {
   return (
     <table className="">

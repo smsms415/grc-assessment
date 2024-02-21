@@ -6,6 +6,8 @@ import {
   AllConceptsDocument,
   AllConceptsSuspenseQueryHookResult,
   Concept,
+  SearchByStringDocument,
+  SearchByStringSuspenseQueryHookResult,
 } from "@/src/__generated__";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 const TD_CLASSNAME = "border px-4";
@@ -22,17 +24,40 @@ export const AllConceptsTableBody = () => {
     return;
   }
 
-  return <ConceptListTableBody allConcepts={allConcepts as Concept[]} />;
+  return <ConceptListTableBody concepts={allConcepts as Concept[]} />;
 };
 
-export const ConceptListTableBody = ({
-  allConcepts,
+export const SearchConceptsTableBody = ({
+  searchTerm,
 }: {
-  allConcepts: Concept[];
+  searchTerm: string;
 }) => {
+  const result: SearchByStringSuspenseQueryHookResult = useSuspenseQuery(
+    SearchByStringDocument,
+    {
+      variables: {
+        str: searchTerm,
+      },
+    }
+  );
+  const {
+    data: { searchByString },
+  } = result;
+
+  /**
+   * @TODO searchByString was not a good name for this array of concepts, rename it
+   */
+  if (!searchByString) {
+    return;
+  }
+
+  return <ConceptListTableBody concepts={searchByString as Concept[]} />;
+};
+
+export const ConceptListTableBody = ({ concepts }: { concepts: Concept[] }) => {
   return (
     <tbody className="">
-      {allConcepts.map(
+      {concepts.map(
         ({ conceptId, displayName, description, childIds, parentIds }) => (
           <tr key={`tr-${conceptId}`}>
             <td className={TD_CLASSNAME}>
@@ -43,11 +68,11 @@ export const ConceptListTableBody = ({
             </td>
             <td className={TD_CLASSNAME}>{description}</td>
             <td className={`${TD_CLASSNAME} text-center`}>
-              {childIds?.length}
+              {childIds?.length ?? 0}
               {/* TODO: display the children on hover */}
             </td>
             <td className={`${TD_CLASSNAME} text-center`}>
-              {parentIds?.length}
+              {parentIds?.length ?? 0}
               {/* TODO: display the parents on hover */}
             </td>
           </tr>
