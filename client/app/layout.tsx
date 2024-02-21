@@ -28,6 +28,13 @@ export default function RootLayout({
           <main className=" flex-grow flex-col items-center justify-between p-24 flex-0 ">
             <ApolloWrapper>{children}</ApolloWrapper>
           </main>
+          <footer className="p-6 bg-black">
+            <nav className="text-white">
+              <a href="https://github.com/smsms415/grc-assessment">
+                source code
+              </a>
+            </nav>
+          </footer>
         </div>
       </body>
     </html>
