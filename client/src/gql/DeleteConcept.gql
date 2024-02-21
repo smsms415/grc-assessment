@@ -1,0 +1,3 @@
+mutation DeleteConcept($id: Int!) {
+  deleteConcept(conceptId: $id)
+}

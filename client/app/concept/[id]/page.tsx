@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { ConceptInstance } from "./instance";
 import Link from "next/link";
+import { DeleteForm } from "./delete";
 
 export default async function Page({
   params: { id },
@@ -19,6 +20,7 @@ export default async function Page({
       </header>
       <Suspense fallback={<div>Loading...</div>}>
         <ConceptInstance id={id} />
+        <DeleteForm id={id} />
       </Suspense>
     </>
   );
