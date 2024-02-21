@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+background-image: url(/content/images/home/home-complex-mysteries-trans-bg.png),url(/content/images/home/home-doing-well-bg.png),url(/content/images/home/home-join-team-bg.png),linear-gradient(to bottom,#58388a 0%,#d50056 22%,#40b4e5 66%,#1b365d 100%);}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

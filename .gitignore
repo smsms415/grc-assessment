@@ -1,0 +1,7 @@
+.DS_Store
+.venv
+server/local/docker/dynamodb/shared-local-instance.db
+.build
+node_modules
+server/.serverless
+.git.old/

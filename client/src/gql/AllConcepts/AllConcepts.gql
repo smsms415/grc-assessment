@@ -1,0 +1,9 @@
+query AllConcepts {
+  allConcepts {
+    conceptId
+    displayName
+    description
+    childIds
+    parentIds
+  }
+}

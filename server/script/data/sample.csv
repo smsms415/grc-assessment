@@ -1,0 +1,6 @@
+conceptId, displayName, description, parentIds, childIds, alternateNames
+1,"Diagnosis", "Entity domain", null, "2,3", null
+2,"Disease of Nervous System", "Diseases targeting the nervous system", "1", "4", null
+3,"Disease of Eye", "Diseases targeting the eye", "1", null, null
+4,"Physical Disorders", "Physical Disorders", "1", "5", null
+5,"Multiple Sclerosis (MS)", "Multiple Sclerosis", "2,4", null,"MS,name1,name2"

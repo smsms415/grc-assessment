@@ -1,0 +1,14 @@
+query GetConcept($id: Int!) {
+  concept(conceptId: $id) {
+    displayName
+    description
+    children {
+      conceptId
+      displayName
+    }
+    parents {
+      conceptId
+      displayName
+    }
+  }
+}
