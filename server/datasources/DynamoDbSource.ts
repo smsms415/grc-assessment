@@ -1,4 +1,5 @@
 import {
+  DeleteItemCommand,
   DynamoDBClient,
   GetItemCommand,
   PutItemCommand,
@@ -89,7 +90,6 @@ export class DynamoDataSource {
     }
   }
 
-  //
   async createConcept(displayName: String) {
     // first get the max concept ID
     const currentMaximum = await this.getMaximumConceptId();
@@ -161,6 +161,26 @@ export class DynamoDataSource {
       // TODO implement actual error handling
       console.error(err);
       return err;
+    }
+  }
+
+  async deleteConcept(id) {
+    const params = {
+      TableName: "Concepts",
+      Key: marshall({
+        conceptId: id,
+        static: "smsms",
+      }),
+    };
+
+    try {
+      await this.client.send(new DeleteItemCommand(params));
+
+      return true;
+    } catch (err) {
+      // TODO implement actual error handling
+      console.error(err);
+      return false;
     }
   }
 }
