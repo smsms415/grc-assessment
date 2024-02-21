@@ -93,9 +93,13 @@ export class DynamoDataSource {
   async getAllConcepts() {
     const params = {
       TableName: "Concepts",
+      KeyConditionExpression: "#static = :static",
+      ExpressionAttributeNames: { "#static": "static" },
+      ExpressionAttributeValues: marshall({ ":static": "smsms" }),
+      ScanIndexForward: true,
     };
     try {
-      const results = await this.client.send(new ScanCommand(params));
+      const results = await this.client.send(new QueryCommand(params));
       const concepts = [];
       results.Items.forEach((item) => {
         concepts.push(unmarshall(item));
