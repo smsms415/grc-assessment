@@ -9,7 +9,7 @@ export default function CreateForm() {
     useCreateConceptMutation();
 
   const addConcept = useCallback(async (fd: FormData) => {
-    const name = encodeURIComponent(fd.get("conceptName") as string);
+    const name = fd.get("conceptName") as string;
 
     await createConceptMutation({ variables: { name } });
 
