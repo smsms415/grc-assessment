@@ -42,6 +42,7 @@ export const SearchConceptsTableBody = ({
       variables: {
         str: searchTerm,
       },
+      fetchPolicy: "no-cache",
     }
   );
   const {

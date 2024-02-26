@@ -16,6 +16,7 @@ export const ConceptInstance = ({ id }: { id: string }) => {
     GetConceptDocument,
     {
       variables: { id: parseInt(id, 10) },
+      fetchPolicy: "no-cache",
     }
   );
   const { data } = result;
